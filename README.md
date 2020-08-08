@@ -134,6 +134,16 @@
     end
     ```
     </details>
+    
+  * Add the function below to the ```vrp\modules\basic_garage.lua``` file:
+    <details><summary>SHOW</summary>
+    
+    ```lua
+    function vRP.getCfgInventoryHud()
+      return cfg_inventory
+    end
+    ```
+    </details>
 
   * Add the code below to the ```vrp\base.lua``` file:
     <details><summary>SHOW</summary>
