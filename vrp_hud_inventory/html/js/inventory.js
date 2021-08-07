@@ -48,20 +48,25 @@ window.addEventListener("message", function (event) {
             },
             stop: function () {
                 itemData = $(this).data("item");
-                
-                if (/zaino/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "zaino" + '.png\'');
-                } else if(/patente/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "patente" + '.png\'');
-                } else if(/bank_cards/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "bank_cards" + '.png\'');
-                } else{
-                    $(this).css('background-image', 'url(\'img/items/' + itemData.name + '.png\'');
-                } 
-                $("#drop").removeClass("disabled");
-                $("#use").removeClass("disabled");
-                $("#give").removeClass("disabled");
-				$("#use").text("Use");
+
+                if (itemData !== undefined && itemData.name !== undefined) {
+                  picture = itemData.name
+                  if (itemData.name.includes("wbody|")) {
+                    var picture = itemData.name.replace("wbody|", "wbody_");
+                  }
+                  if (itemData.name.includes("wammo|")) {
+                    var picture = itemData.name.replace("wammo|", "wammo_");
+                  }
+                  if (itemData.name.includes("key_")) {
+                    var picture = itemData.name.replace("key_", "keys/key_");
+                  }
+                    $(this).css('background-image', 'url(\'img/items/' + picture + '.png\'');
+                    $("#drop").removeClass("disabled");
+                    $("#use").removeClass("disabled");
+                    $("#give").removeClass("disabled");
+                    $("#use").text("Use");
+
+                }
             }
         });
     } else if (event.data.action == "setSecondInventoryItems") {
@@ -80,19 +85,23 @@ window.addEventListener("message", function (event) {
             },
             stop: function () {
                 itemData = $(this).data("item");
-                if (/zaino/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "zaino" + '.png\'');
-                } else if(/patente/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "patente" + '.png\'');
-                } else if(/bank_cards/.test(itemData.name)) {
-                    $(this).css('background-image', 'url(\'img/items/' + "bank_cards" + '.png\'');
-                } else{
-                    $(this).css('background-image', 'url(\'img/items/' + itemData.name + '.png\'');
-                } 
-                $("#drop").removeClass("disabled");
-                $("#use").removeClass("disabled");
-                $("#give").removeClass("disabled");
-            }
+
+                if (itemData !== undefined && itemData.name !== undefined) {
+                  picture = itemData.name
+                  if (itemData.name.includes("wbody|")) {
+                    var picture = itemData.name.replace("wbody|", "wbody_");
+                  }
+                  if (itemData.name.includes("wammo|")) {
+                    var picture = itemData.name.replace("wammo|", "wammo_");
+                  }
+                  if (itemData.name.includes("key_")) {
+                    var picture = itemData.name.replace("key_", "keys/key_");
+                  }
+                    $(this).css('background-image', 'url(\'img/items/' + picture + '.png\'');
+                    $("#drop").removeClass("disabled");
+                    $("#use").removeClass("disabled");
+                    $("#give").removeClass("disabled");
+                }
         }); 
     } else if (event.data.action == "rimuoviItems") {
         $(".info-div").hide();
@@ -124,15 +133,17 @@ function closeInventory() {
 function inventorySetup(items) {
     $("#playerInventory").html("");
     $.each(items, function (index, item) {
-        if (/zaino/.test(item.name)) {
-            setItem(index, item, "zaino");
-        } else if(/patente/.test(item.name)) {
-            setItem(index, item, "patente");
-        } else if(/bank_cards/.test(item.name)) {
-            setItem(index, item, "bank_cards");
-        } else{
-            setItem(index, item, item.name);
+        picture = item.name
+        if (item.name.includes("wbody|")) {
+          var picture = item.name.replace("wbody|", "wbody_");
         }
+        if (item.name.includes("wammo|")) {
+          var picture = item.name.replace("wammo|", "wammo_");
+        }
+        if (item.name.includes("key_")) {
+          var picture = item.name.replace("key_", "keys/key_");
+        }
+            setItem(index, item, picture);
     });
 }
 
@@ -143,18 +154,21 @@ function setItem(index, item, name) {
     $('#item-' + index).data('inventory', "main");
 }
 
+
 function secondInventorySetup(items) {
     $("#otherInventory").html("");
     $.each(items, function (index, item) {
-        if (/zaino/.test(item.name)) {
-            setOtherItem(index, item, "zaino");
-        } else if(/patente/.test(item.name)) {
-            setOtherItem(index, item, "patente");
-        } else if(/bank_cards/.test(item.name)) {
-            setOtherItem(index, item, "bank_cards");
-        } else{
-            setOtherItem(index, item, item.name);
-        }      
+        picture = item.name
+        if (item.name.includes("wbody|")) {
+          var picture = item.name.replace("wbody|", "wbody_");
+        }
+        if (item.name.includes("wammo|")) {
+          var picture = item.name.replace("wammo|", "wammo_");
+        }
+        if (item.name.includes("key_")) {
+          var picture = item.name.replace("key_", "keys/key_");
+        }
+            setOtherItem(index, item, picture);  
     });
 }
 
